@@ -1,0 +1,7 @@
+CNF Grammar:
+
+UpperCase 'V' == OR
+Ampersand '&' == AND
+Question Mark '?' == NOT
+Open Parenthesis '(' == CLAUSE START/OPEN CLAUSE
+Close Parenthesis ')' == CLAUSE END/CLOSE CLAUSE

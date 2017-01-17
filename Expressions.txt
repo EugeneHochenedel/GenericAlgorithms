@@ -1,0 +1,5 @@
+(a V c) & (b V c)
+a & (?b V c)
+(?a V c) & (?b V d)
+(a V c) & (b V ?c V ?d) & (a V ?b V c)
+(a V b V c) & (?a V c)
