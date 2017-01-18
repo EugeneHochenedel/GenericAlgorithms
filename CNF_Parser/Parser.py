@@ -1,5 +1,5 @@
 def Main():
-	inFile = open("Expressions.txt", 'r')
+	inFile = open("CNF_Parser\Expressions.txt", 'r')
 	
 	for expression in (inFile):
 		
