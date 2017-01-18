@@ -1,7 +1,7 @@
 CNF Grammar:
 
-UpperCase 'V' == OR
-Ampersand '&' == AND
-Question Mark '?' == NOT
-Open Parenthesis '(' == CLAUSE START/OPEN CLAUSE
-Close Parenthesis ')' == CLAUSE END/CLOSE CLAUSE
+UpperCase 'V', Forward Slash '/', and Comma ',' == OR
+Ampersand '&', Asterisk '*', and Colon ':' == AND
+Question Mark '?', Exlamation Point '!', and Pound '#' == NOT
+Open Parenthesis '(', Open Bracket '[', and Less Than '<' == CLAUSE START/OPEN CLAUSE
+Close Parenthesis ')', Close Bracket ']', and Greater Than '>' == CLAUSE END/CLOSE CLAUSE
