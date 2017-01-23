@@ -10,13 +10,6 @@ def Main():
 		#Recieves data after each time the string is evaluated
 		expressionEval = "";
 		
-		#Numeric count for each time there is a NOT in the string
-		eachNOT = 0;
-		#Numeric count for each time there is an AND in the string
-		eachAND = 0;
-		#Numeric count for each time there is an OR in the string
-		eachOR = 0;
-		
 		#An empty list that will hold all of the literals in the string
 		literals = [];
 		#An empty list that will hold all of the clauses within the string
@@ -38,29 +31,27 @@ def Main():
 		for char in (expression):
 			#Checks if the char opens a clause
 			if (char in listOPEN):
+				expressionEval += char
 				#Sets open clause to true
 				openClause = True;
 			
 			#Checks if the char is a NOT and if the char is inside or outside of a clause
-			elif (char in listNOT and (openClause == True or openClause == False)):
-				#Increments the NOTs by 1
-				eachNOT += 1;
-				#Adds the char to the string for the expression evaluation
-				expressionEval += char;
+			elif (char in listNOT):
+				if(openClause == True):
+					#Adds the char to the string for the expression evaluation
+					expressionEval += char;
 			
 			#Checks if the char is an AND and if the char is inside or outside of a clause
-			elif (char in listAND and (openClause == True or openClause == False)):
-				#Increments the ANDs variable by 1
-				eachAND += 1;
-				#Adds the char to the string for the expression evaluation
-				expressionEval += char;
+			elif (char in listAND):
+				if(openClause == True):
+					#Adds the char to the string for the expression evaluation
+					expressionEval += char;
 			
 			#Checks if the char is an OR and if the char is inside or outside of a clause
-			elif (char in listOR and (openClause == True or openClause == False)):
-				#Increments the ORs variable by 1
-				eachOR += 1;
-				#Adds the char to the string for the expression evaluation
-				expressionEval += char;
+			elif (char in listOR):
+				if(openClause == True):
+					#Adds the char to the string for the expression evaluation
+					expressionEval += char;
 			
 			#Checks if the character is to be ignored
 			elif (char in listNULL):
@@ -69,6 +60,7 @@ def Main():
 			
 			#Checks if the character closes a clause
 			elif (char in listEND and openClause == True):
+				expressionEval += char
 				#Sets open clause to false, closing it
 				openClause = False;
 				#Adds the informaiton in the expression evaluation string to the list of clauses
@@ -77,12 +69,12 @@ def Main():
 				expressionEval = "";
 
 			elif (openClause == True or openClause == False):
+				#Adds the characters that weren't counted to the expression evaluation string
+				expressionEval += char;
 				#Checks if char is in the list of literals
 				if (char in literals):
 					#If the char is already in the list, it gets ignored
 					continue;
-				#Adds the characters that weren't counted to the expression evaluation string
-				expressionEval += char;
 				#If the char is not in a list, add it to the list of literals
 				literals.append(char);
 		
@@ -91,9 +83,6 @@ def Main():
 		print "Literals:", len(literals);
 		print "Each literal:", literals;
 		print "Clauses:", len(eachClause);
-		print "AND:", eachAND;
-		print "OR:", eachOR;
-		print "NEGATION:", eachNOT;
 		
 		print "\n";
 	
