@@ -1,7 +1,6 @@
-(a V c) & (b V c)
-(a V b) & (?b V c)
-(?a V c) & (?b V d)
-(a V c) & (b V ?c V ?d) & (a V ?b V c)
-(a V b V c) & (?a V c)
-![a | b] * [c | d | !b]
-<#b , c , d> : <a ,  c , d>
+(a V !b) & (!a V c) & (b V c)
+(a V b) & (!b V c) & (a V c)
+(a V c) & (!c V !d) & (!b V c)
+(a V c) & (!c V !d) & (!b V c) & (b V d)
+(a V c) & (!c V !d) & (!b V c) & (a V e)
+(a V c) & (!a V b) & (b V c)
