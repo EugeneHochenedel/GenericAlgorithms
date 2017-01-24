@@ -1,6 +1,6 @@
 def Main():
 	#Opens and reads the file
-	inFile = open("Expressions.txt", 'r')
+	inFile = open("Expression.txt", 'r')
 	
 	#Does the following for every expression in the opened file
 	for expression in (inFile):
@@ -9,11 +9,16 @@ def Main():
 		openClause = False;
 		#Recieves data after each time the string is evaluated
 		expressionEval = "";
+		#An empty string to hold the converted clauses
+		convertedExpression = "";
 		
 		#An empty list that will hold all of the literals in the string
 		literals = [];
 		#An empty list that will hold all of the clauses within the string
 		eachClause = [];
+		values = [1, 0, 1, 0];
+		indexValue = 0;
+		
 		#List of characters that open a clause in the string
 		listOPEN = ['(', '[', '<'];
 		#List of characters in the string that represent a NOT
@@ -36,27 +41,25 @@ def Main():
 				openClause = True;
 			
 			#Checks if the char is a NOT and if the char is inside or outside of a clause
-			elif (char in listNOT):
-				if(openClause == True):
+			elif (char in listNOT and openClause == True):
 					#Adds the char to the string for the expression evaluation
 					expressionEval += char;
 			
 			#Checks if the char is an AND and if the char is inside or outside of a clause
 			elif (char in listAND):
-				if(openClause == True):
-					#Adds the char to the string for the expression evaluation
-					expressionEval += char;
+				#Adds the char to the string for the expression evaluation
+				expressionEval += char;
 			
 			#Checks if the char is an OR and if the char is inside or outside of a clause
-			elif (char in listOR):
-				if(openClause == True):
+			elif (char in listOR and openClause == True):
 					#Adds the char to the string for the expression evaluation
 					expressionEval += char;
 			
 			#Checks if the character is to be ignored
 			elif (char in listNULL):
+				expressionEval += char
 				#if the character is in the list, it's ignored
-				continue;
+				#continue;
 			
 			#Checks if the character closes a clause
 			elif (char in listEND and openClause == True):
@@ -77,13 +80,36 @@ def Main():
 					continue;
 				#If the char is not in a list, add it to the list of literals
 				literals.append(char);
+
+		#Loops through each clause and converts the literals to values
+		for string in eachClause:
+			for char in string:
+				if char in listOPEN:
+					convertedExpression += '('
+				elif char in listNOT:
+					convertedExpression += '!';
+				elif char in listAND:
+					convertedExpression += '&&';
+				elif char in listOR:
+					convertedExpression += '||';
+				elif char in listNULL:
+					convertedExpression += ' ';
+				elif char in listEND:
+					convertedExpression += ')';
+				else:
+					for item in literals:
+						if item == char:
+							indexValue = 0;
+						else:
+							indexValue += 1;
+					convertedExpression += str(values[indexValue])
 		
 		literals.sort();
-		print expression;
+		print "Expression:", expression;
 		print "Literals:", len(literals);
 		print "Each literal:", literals;
 		print "Clauses:", len(eachClause);
-		
+		print "Conversion:", convertedExpression;
 		print "\n";
 	
 	inFile.close();

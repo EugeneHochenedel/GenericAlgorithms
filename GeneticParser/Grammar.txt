@@ -1,4 +1,4 @@
-CNF Grammar:
+Grammar:
 
 UpperCase 'V', Vertical Bar '|', and Comma ',' == OR
 Ampersand '&', Asterisk '*', and Colon ':' == AND

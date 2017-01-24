@@ -1,1 +1,0 @@
-start C:\Python27\python -i %~dp0CNF_Parser\Parser.py
