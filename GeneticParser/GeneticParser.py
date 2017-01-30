@@ -18,6 +18,8 @@ def Main():
 		eachClause = [];
 		values = [0, 1, 0, 1, 0];
 		indexValue = 0;
+		test1 = "01010";
+		temp = [];
 		
 		#List of characters that open a clause in the string
 		listOPEN = ['(', '[', '<'];
@@ -79,7 +81,8 @@ def Main():
 				literals.append(char);
 		
 		literals.sort();
-				
+		temp = map(None, literals, values);
+		
 		#Loops through each clause and converts the literals to values
 		for string in (eachClause):
 			inverseValue = 0;
