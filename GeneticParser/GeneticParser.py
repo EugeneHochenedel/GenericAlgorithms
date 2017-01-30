@@ -19,15 +19,16 @@ def Main():
 		expressionEval = "";
 		#An empty string to hold the converted clauses
 		convertedExpression = "";
+		printedCoversion = "";
+		printedInversion = "";
 		
 		#An empty list that will hold all of the literals in the string
 		literals = [];
 		#An empty list that will hold all of the clauses within the string
 		eachClause = [];
-		values = [0, 1, 0, 1, 0];
-		indexValue = 0;
-		test1 = "01010";
-		temp = [];
+		values = [0, 1, 0, 1, 0, 1];
+		final = "";
+		evaluations = [];
 		
 		#List of characters that open a clause in the string
 		listOPEN = ['(', '[', '<'];
@@ -55,10 +56,10 @@ def Main():
 				expressionEval += char;
 			
 			#Checks if the char is an AND and if the char is inside or outside of a clause
-			elif (char in listAND):
+			elif (char in listAND and openClause == True):
 				#Adds the char to the string for the expression evaluation
 				expressionEval += char;
-			
+				
 			#Checks if the char is an OR and if the char is inside or outside of a clause
 			elif (char in listOR and openClause == True):
 				#Adds the char to the string for the expression evaluation
@@ -99,34 +100,49 @@ def Main():
 			for char in (string):
 				if (char in listNOT):
 					convertedExpression += '~';
+					printedCoversion += '~';
 				elif (char in listAND):
 					convertedExpression += '&';
+					printedCoversion += '&';
 				elif (char in listOR):
 					convertedExpression += '|';
+					printedCoversion += '|';
 				else:
 					index = varMapping(literals, char);
 					convertedExpression += str(values[index])
+					printedCoversion += str(values[index]);
 
 			for char in (convertedExpression):
 				if (inverseValue == 1):
 					if (char == '1'):
 						inverseExpression += str(0);
+						printedInversion += str(0);
 					
 					elif (char == '0'):
 						inverseExpression += str(1);
+						printedInversion += str(1);
 					inverseValue = 0;
 					
 				elif (char == '~' and inverseValue == 0):
 					inverseValue = 1;
 				else:
 					inverseExpression += char;
-		
+					printedInversion += char;
+				
+			evaluations.append(eval(inverseExpression));
+			convertedExpression = '';
+			
+		final = eval(inverseExpression);
+		inverseExpression = '';
+			
 		print "Expression:", expression;
 		print "Literals:", len(literals);
 		print "Each literal:", literals;
 		print "Clauses:", len(eachClause);
-		print "Conversion:", convertedExpression;
-		print "Inverse:", inverseExpression;
+		print "Conversion:", printedCoversion;
+		print "Inverse:", printedInversion;
+		print "Evaluation:", evaluations;
+		print "Final:", final;
 		print '\n';
 	
 	inFile.close();
