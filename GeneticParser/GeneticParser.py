@@ -1,3 +1,11 @@
+def varMapping(list, translate):
+	int = 0;
+	for items in (list):
+		if (items == translate):
+			return int;
+		else:
+			int += 1;
+		
 def Main():
 	#Opens and reads the file
 	inFile = open("Expression.txt", 'r');
@@ -81,7 +89,6 @@ def Main():
 				literals.append(char);
 		
 		literals.sort();
-		temp = map(None, literals, values);
 		
 		#Loops through each clause and converts the literals to values
 		for string in (eachClause):
@@ -97,12 +104,8 @@ def Main():
 				elif (char in listOR):
 					convertedExpression += '|';
 				else:
-					for variable in (literals):
-						if variable == char:
-							indexValue = 0;
-						else:
-							indexValue += 1;
-					convertedExpression += str(values[indexValue])
+					index = varMapping(literals, char);
+					convertedExpression += str(values[index])
 
 			for char in (convertedExpression):
 				if (inverseValue == 1):
